@@ -70,11 +70,10 @@ Wc(1,1)     = Wm(1,1) + 1 - alpha^2 + beta;
 Wc(2:nsp,1) = Wm(2:nsp,1);
 
 
-rr   = [0.001758668956825  0.00099020743  0.00019774013  0.00023836151...
+rr   = [0.0002  0.002  0.0002  0.0002...
         0.0000000001  0.0000000001 1 1  1]/1000';
 
-qq(1:nx,1)     = [0.0056025380900  0.004111586119258  0.002035203...  
-    0.00401987933 0.00412856025380900  0.004586119258  0.1  0.1 0.1]*10';
+qq(1:nx,1)     = [0.005  0.004  0.002 0.004 0.004  0.004  0.1  0.1 0.1]*10';
 qq(nx+1:nxp,1) = [zeros(nxp-nx,1)];
     
 % Initial state propagation error covariance matrix - pcov(nxp): only diagonal terms
@@ -100,7 +99,7 @@ xtSigPt(1:nxp,:) = Xsp(1:nxp,:);                 % for the first data point
 
 for k=1:length(data)
     disp(k)
-    u1c = u_input(k,:)';                          % Exogenous control inputs
+    u1c = u_input(k,:)'; 
     dt = 0.1;
     % Augmented Covariance matrix and augmented state vector
     Pa = blkdiag(pcov, Qnoise, Rnoise);
@@ -113,7 +112,7 @@ for k=1:length(data)
     %----------------------------------------------------------------------
     % Prediction step (Time update): Propagate sigma points through state functions
     if k > 1
-    u1p = u_input(k-1,:)';                        % Exogenous control input vector 
+    u1p = u_input(k-1,:)';
         
     dt = (data(k, 1)-data(k-1, 1));
         for ip=1:nsp
