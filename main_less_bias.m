@@ -168,7 +168,8 @@ for k=1:length(data)
     pcov = Pxx - Kgain * Pyy * Kgain';
    
     % Save estimated states for plotting
-    y_estimated(k,1:ny)  = ytilde';               
+    y_estimated(k,1:ny)  = ytilde';
+    xhSave(k,1:nxp) = xhat';
 
 end
 
@@ -223,7 +224,7 @@ saveas(gcf, filename);
 % 
 % for i = 10:15
 %     figure;
-%     plot(time, xhSave(:,i))
+%     plot(data_time, xhSave(:,i))
 %     grid on
 %     xlabel('Time');
 %     ylabel(titles{i-9});
